@@ -1,0 +1,3 @@
+project_security:
+    resource: "@ApplicationInternitStatusSolicitacaoBundle/Controller/"
+    type:     annotation

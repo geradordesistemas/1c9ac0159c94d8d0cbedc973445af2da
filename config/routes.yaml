@@ -1,0 +1,169 @@
+application.project.security.provider.admin:
+    resource: '@ApplicationProjectSecurityAdminBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.project.security.provider.api:
+    resource: '@ApplicationProjectSecurityUserBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.project.content:
+    resource: '@ApplicationProjectContentBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.project.media:
+    resource: '@ApplicationProjectMediaBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.project.setting:
+    resource: '@ApplicationProjectSettingBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+media:
+    resource: '@SonataMediaBundle/Resources/config/routing/media.xml'
+    prefix: /media
+
+controllers:
+    resource: ../src/Controller/
+    type: annotation
+
+kernel:
+    resource: ../src/Kernel.php
+    type: annotation
+
+#api_login_check:
+#    path: /api/login_check
+
+app.swagger_ui:
+    path: /api
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger_ui }
+
+app.swagger:
+    path: /api.json
+    methods: GET
+    defaults: { _controller: nelmio_api_doc.controller.swagger }
+
+###############################################################################
+# Schema Bundles Routes
+###############################################################################
+
+application.internit.empreendimentobundle:
+    resource: '@ApplicationInternitEmpreendimentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.statusempreendimentobundle:
+    resource: '@ApplicationInternitStatusEmpreendimentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.blocobundle:
+    resource: '@ApplicationInternitBlocoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.unidadebundle:
+    resource: '@ApplicationInternitUnidadeBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.empresabundle:
+    resource: '@ApplicationInternitEmpresaBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.topicobundle:
+    resource: '@ApplicationInternitTopicoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.perguntafrequentebundle:
+    resource: '@ApplicationInternitPerguntaFrequenteBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.acompanhamentobundle:
+    resource: '@ApplicationInternitAcompanhamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.sacbundle:
+    resource: '@ApplicationInternitSacBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.departamentobundle:
+    resource: '@ApplicationInternitDepartamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.galeriaempreendimentobundle:
+    resource: '@ApplicationInternitGaleriaEmpreendimentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.etapabundle:
+    resource: '@ApplicationInternitEtapaBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.etapaacompanhamentobundle:
+    resource: '@ApplicationInternitEtapaAcompanhamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.clientebundle:
+    resource: '@ApplicationInternitClienteBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.unidadeclientebundle:
+    resource: '@ApplicationInternitUnidadeClienteBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.tipoclientebundle:
+    resource: '@ApplicationInternitTipoClienteBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.solicitacaobundle:
+    resource: '@ApplicationInternitSolicitacaoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.tiposolicitacaobundle:
+    resource: '@ApplicationInternitTipoSolicitacaoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.andamentosolicitacaobundle:
+    resource: '@ApplicationInternitAndamentoSolicitacaoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.statussolicitacaobundle:
+    resource: '@ApplicationInternitStatusSolicitacaoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.respostasolicitacaobundle:
+    resource: '@ApplicationInternitRespostaSolicitacaoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.agendamentobundle:
+    resource: '@ApplicationInternitAgendamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.profissionalbundle:
+    resource: '@ApplicationInternitProfissionalBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.profissaobundle:
+    resource: '@ApplicationInternitProfissaoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.periododisponivelagendamentobundle:
+    resource: '@ApplicationInternitPeriodoDisponivelAgendamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.diaindisponivelagendamentobundle:
+    resource: '@ApplicationInternitDiaIndisponivelAgendamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.downloadbundle:
+    resource: '@ApplicationInternitDownloadBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.comunicadobundle:
+    resource: '@ApplicationInternitComunicadoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.periodoagendamentobundle:
+    resource: '@ApplicationInternitPeriodoAgendamentoBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+
+application.internit.diasemanabundle:
+    resource: '@ApplicationInternitDiaSemanaBundle/Resources/config/routes/routes.yaml'
+    prefix: /
+

@@ -1,0 +1,334 @@
+{% extends "@ApplicationProjectContent/base/base_web.html.twig" %}
+
+{% block title %}
+    list
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+{% endblock %}
+
+{% block javascriptsFooter %}
+    {{ parent() }}
+
+{% endblock %}
+
+
+{% block body %}
+    <div class="container" style="margin-top: 5%">
+        <div class="row">
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Empreendimento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_empreendimento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo StatusEmpreendimento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_statusEmpreendimento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Bloco</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_bloco_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Unidade</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_unidade_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Empresa</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_empresa_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Topico</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_topico_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo PerguntaFrequente</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_perguntaFrequente_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Acompanhamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_acompanhamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Sac</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_sac_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Departamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_departamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo GaleriaEmpreendimento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_galeriaEmpreendimento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Etapa</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_etapa_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo EtapaAcompanhamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_etapaAcompanhamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Cliente</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_cliente_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo UnidadeCliente</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_unidadeCliente_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo TipoCliente</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_tipoCliente_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Solicitacao</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_solicitacao_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo TipoSolicitacao</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_tipoSolicitacao_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo AndamentoSolicitacao</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_andamentoSolicitacao_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo StatusSolicitacao</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_statusSolicitacao_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo RespostaSolicitacao</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_respostaSolicitacao_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Agendamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_agendamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Profissional</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_profissional_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Profissao</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_profissao_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo PeriodoDisponivelAgendamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_periodoDisponivelAgendamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo DiaIndisponivelAgendamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_diaIndisponivelAgendamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Download</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_download_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo Comunicado</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_comunicado_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo PeriodoAgendamento</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_periodoAgendamento_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class=col-4 style="margin-bottom: 10px;">
+                <div class="card">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Módulo DiaSemana</h5>
+                        <p class="card-text">...</p>
+                        <a href="{{ path("web_diaSemana_list") }}" class="btn btn-primary">Ir para</a>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+{% endblock %}
+
+
+
+

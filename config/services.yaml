@@ -1,0 +1,617 @@
+# This file is the entry point to configure your own services.
+# Files in the packages/ subdirectory configure your dependencies.
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
+parameters:
+    locale: 'pt_BR'
+
+services:
+    # default configuration for services in *this* file
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # makes classes in src/ available to be used as services
+    # this creates a service per class whose id is the fully-qualified class name
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # overload kernel exception
+    #    App\Application\Project\ContentBundle\EventListener\ExceptionListener:
+    #        tags:
+    #            - { name: kernel.event_listener, event: kernel.exception }
+
+    #    App\Application\Project\SecurityProviderApiBundle\EventListener\ExceptionListener:
+    #        tags:
+    #            - { name: kernel.event_listener, event: kernel.exception, method: onKernelException }
+    #
+    #
+
+
+    # ####################################################################################
+    # injeções de dependências
+
+    #    app.menu_listener:
+    #        class: App\Application\Project\ContentBundle\EventListener\MenuBuilderListener
+    #        tags:
+    #            - { name: kernel.event_listener, event: sonata.admin.event.configure.menu.sidebar, method: addMenuItems }
+    #        arguments:
+
+
+    #    admin.custom:
+    #        class: App\Admin\CustomAdmin
+    #        tags:
+    #            - { name: sonata.admin, model_class: App\Entity\Custom, manager_type: orm, label: Category, security_handler: App\Application\Project\AdminBundle\Security\Handler }
+
+
+    # ####################################################################################
+    # serviços padrões da estrutura do projeto
+
+    # Content Bundle
+    project.content.content:
+        class: App\Application\Project\ContentBundle\Admin\ContentAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Project\ContentBundle\Entity\Content,
+                controller: App\Application\Project\ContentBundle\Controller\ContentAdminController,
+                show_in_dashboard: false,
+                on_top: false,
+                group: "Content",
+                label: Content,
+                icon: 'fa fa-solid fa-passport',
+            }
+            #- { name: sonata.admin, manager_type: orm, group: "Content", label: User, on_top: false, icon: 'fa fa-solid fa-user',, show_in_dashboard: false }
+
+    project.content.setting:
+        class: App\Application\Project\SettingBundle\Admin\SmtpEmailAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Project\SettingBundle\Entity\SmtpEmail,
+                controller: App\Application\Project\SettingBundle\Controller\SmtpEmailAdminController,
+                show_in_dashboard: true,
+                on_top: false,
+                group: "Configurações",
+                label: SMTP,
+                icon: 'fas fa-cogs',
+            }
+            #- { name: sonata.admin, manager_type: orm, group: "Content", label: User, on_top: false, icon: 'fa fa-solid fa-user',, show_in_dashboard: false }
+
+
+
+
+
+
+    # ####################################################################################
+    # Provedor de usuário ADMIN
+
+    project.security.provider.admin.user:
+        class: App\Application\Project\SecurityAdminBundle\Admin\UserAdminAdmin
+        calls:
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Project\SecurityAdminBundle\Entity\UserAdmin,
+                controller: App\Application\Project\SecurityAdminBundle\Controller\UserAdminAdminController,
+                show_in_dashboard: true,
+                on_top: false,
+                group: "Acesso Admin",
+                label: Administradores,
+                icon: 'fa fa-solid fa-shield-alt',
+            }
+
+    project.security.provider.admin.group:
+        class: App\Application\Project\SecurityAdminBundle\Admin\GroupAdminAdmin
+        calls:
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Project\SecurityAdminBundle\Entity\GroupAdmin,
+                controller: App\Application\Project\SecurityAdminBundle\Controller\GroupAdminAdminController,
+                show_in_dashboard: true,
+                on_top: false,
+                group: "Acesso Admin",
+                label: Grupos,
+                icon: 'fa fa-solid fa-shield-alt',
+            }
+
+    # ####################################################################################
+    # Provedor de usuário API
+
+    project.security.provider.api.user:
+        class: App\Application\Project\SecurityUserBundle\Admin\UserAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Project\SecurityUserBundle\Entity\User,
+                controller: App\Application\Project\SecurityUserBundle\Controller\UserAdminController,
+                show_in_dashboard: true,
+                on_top: false,
+                group: "Acesso Usuários",
+                label: Usuários,
+                icon: 'fa fa-solid fa-users',
+            }
+
+    project.security.provider.api.group:
+        class: App\Application\Project\SecurityUserBundle\Admin\GroupAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Project\SecurityUserBundle\Entity\Group,
+                controller: App\Application\Project\SecurityUserBundle\Controller\GroupAdminController,
+                show_in_dashboard: true,
+                on_top: false,
+                group: "Acesso Usuários",
+                label: Grupos,
+                icon: 'fa fa-solid fa-users',
+            }
+
+    # ####################################################################################
+    # por favor, note que as últimas definições sao da estrutura padrão do projeto
+    # adicione mais definições de serviço quando for necessária abaixo
+
+
+    # Services Schemas Bundle
+    # ####################################################################################
+    internit.empreendimentobundle.empreendimento:
+        class: App\Application\Internit\EmpreendimentoBundle\Admin\EmpreendimentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\EmpreendimentoBundle\Entity\Empreendimento,
+                controller: App\Application\Internit\EmpreendimentoBundle\Controller\EmpreendimentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Empreendimento",
+                label: Empreendimento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.statusempreendimentobundle.statusempreendimento:
+        class: App\Application\Internit\StatusEmpreendimentoBundle\Admin\StatusEmpreendimentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\StatusEmpreendimentoBundle\Entity\StatusEmpreendimento,
+                controller: App\Application\Internit\StatusEmpreendimentoBundle\Controller\StatusEmpreendimentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "StatusEmpreendimento",
+                label: StatusEmpreendimento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.blocobundle.bloco:
+        class: App\Application\Internit\BlocoBundle\Admin\BlocoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\BlocoBundle\Entity\Bloco,
+                controller: App\Application\Internit\BlocoBundle\Controller\BlocoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Bloco",
+                label: Bloco,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.unidadebundle.unidade:
+        class: App\Application\Internit\UnidadeBundle\Admin\UnidadeAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\UnidadeBundle\Entity\Unidade,
+                controller: App\Application\Internit\UnidadeBundle\Controller\UnidadeAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Unidade",
+                label: Unidade,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.empresabundle.empresa:
+        class: App\Application\Internit\EmpresaBundle\Admin\EmpresaAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\EmpresaBundle\Entity\Empresa,
+                controller: App\Application\Internit\EmpresaBundle\Controller\EmpresaAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Empresa",
+                label: Empresa,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.topicobundle.topico:
+        class: App\Application\Internit\TopicoBundle\Admin\TopicoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\TopicoBundle\Entity\Topico,
+                controller: App\Application\Internit\TopicoBundle\Controller\TopicoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Topico",
+                label: Topico,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.perguntafrequentebundle.perguntafrequente:
+        class: App\Application\Internit\PerguntaFrequenteBundle\Admin\PerguntaFrequenteAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\PerguntaFrequenteBundle\Entity\PerguntaFrequente,
+                controller: App\Application\Internit\PerguntaFrequenteBundle\Controller\PerguntaFrequenteAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "PerguntaFrequente",
+                label: PerguntaFrequente,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.acompanhamentobundle.acompanhamento:
+        class: App\Application\Internit\AcompanhamentoBundle\Admin\AcompanhamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\AcompanhamentoBundle\Entity\Acompanhamento,
+                controller: App\Application\Internit\AcompanhamentoBundle\Controller\AcompanhamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Acompanhamento",
+                label: Acompanhamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.sacbundle.sac:
+        class: App\Application\Internit\SacBundle\Admin\SacAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\SacBundle\Entity\Sac,
+                controller: App\Application\Internit\SacBundle\Controller\SacAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Sac",
+                label: Sac,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.departamentobundle.departamento:
+        class: App\Application\Internit\DepartamentoBundle\Admin\DepartamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\DepartamentoBundle\Entity\Departamento,
+                controller: App\Application\Internit\DepartamentoBundle\Controller\DepartamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Departamento",
+                label: Departamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.galeriaempreendimentobundle.galeriaempreendimento:
+        class: App\Application\Internit\GaleriaEmpreendimentoBundle\Admin\GaleriaEmpreendimentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\GaleriaEmpreendimentoBundle\Entity\GaleriaEmpreendimento,
+                controller: App\Application\Internit\GaleriaEmpreendimentoBundle\Controller\GaleriaEmpreendimentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "GaleriaEmpreendimento",
+                label: GaleriaEmpreendimento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.etapabundle.etapa:
+        class: App\Application\Internit\EtapaBundle\Admin\EtapaAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\EtapaBundle\Entity\Etapa,
+                controller: App\Application\Internit\EtapaBundle\Controller\EtapaAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Etapa",
+                label: Etapa,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.etapaacompanhamentobundle.etapaacompanhamento:
+        class: App\Application\Internit\EtapaAcompanhamentoBundle\Admin\EtapaAcompanhamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\EtapaAcompanhamentoBundle\Entity\EtapaAcompanhamento,
+                controller: App\Application\Internit\EtapaAcompanhamentoBundle\Controller\EtapaAcompanhamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "EtapaAcompanhamento",
+                label: EtapaAcompanhamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.clientebundle.cliente:
+        class: App\Application\Internit\ClienteBundle\Admin\ClienteAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\ClienteBundle\Entity\Cliente,
+                controller: App\Application\Internit\ClienteBundle\Controller\ClienteAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Cliente",
+                label: Cliente,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.unidadeclientebundle.unidadecliente:
+        class: App\Application\Internit\UnidadeClienteBundle\Admin\UnidadeClienteAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\UnidadeClienteBundle\Entity\UnidadeCliente,
+                controller: App\Application\Internit\UnidadeClienteBundle\Controller\UnidadeClienteAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "UnidadeCliente",
+                label: UnidadeCliente,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.tipoclientebundle.tipocliente:
+        class: App\Application\Internit\TipoClienteBundle\Admin\TipoClienteAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\TipoClienteBundle\Entity\TipoCliente,
+                controller: App\Application\Internit\TipoClienteBundle\Controller\TipoClienteAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "TipoCliente",
+                label: TipoCliente,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.solicitacaobundle.solicitacao:
+        class: App\Application\Internit\SolicitacaoBundle\Admin\SolicitacaoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\SolicitacaoBundle\Entity\Solicitacao,
+                controller: App\Application\Internit\SolicitacaoBundle\Controller\SolicitacaoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Solicitacao",
+                label: Solicitacao,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.tiposolicitacaobundle.tiposolicitacao:
+        class: App\Application\Internit\TipoSolicitacaoBundle\Admin\TipoSolicitacaoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\TipoSolicitacaoBundle\Entity\TipoSolicitacao,
+                controller: App\Application\Internit\TipoSolicitacaoBundle\Controller\TipoSolicitacaoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "TipoSolicitacao",
+                label: TipoSolicitacao,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.andamentosolicitacaobundle.andamentosolicitacao:
+        class: App\Application\Internit\AndamentoSolicitacaoBundle\Admin\AndamentoSolicitacaoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\AndamentoSolicitacaoBundle\Entity\AndamentoSolicitacao,
+                controller: App\Application\Internit\AndamentoSolicitacaoBundle\Controller\AndamentoSolicitacaoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "AndamentoSolicitacao",
+                label: AndamentoSolicitacao,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.statussolicitacaobundle.statussolicitacao:
+        class: App\Application\Internit\StatusSolicitacaoBundle\Admin\StatusSolicitacaoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\StatusSolicitacaoBundle\Entity\StatusSolicitacao,
+                controller: App\Application\Internit\StatusSolicitacaoBundle\Controller\StatusSolicitacaoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "StatusSolicitacao",
+                label: StatusSolicitacao,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.respostasolicitacaobundle.respostasolicitacao:
+        class: App\Application\Internit\RespostaSolicitacaoBundle\Admin\RespostaSolicitacaoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\RespostaSolicitacaoBundle\Entity\RespostaSolicitacao,
+                controller: App\Application\Internit\RespostaSolicitacaoBundle\Controller\RespostaSolicitacaoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "RespostaSolicitacao",
+                label: RespostaSolicitacao,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.agendamentobundle.agendamento:
+        class: App\Application\Internit\AgendamentoBundle\Admin\AgendamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\AgendamentoBundle\Entity\Agendamento,
+                controller: App\Application\Internit\AgendamentoBundle\Controller\AgendamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Agendamento",
+                label: Agendamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.profissionalbundle.profissional:
+        class: App\Application\Internit\ProfissionalBundle\Admin\ProfissionalAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\ProfissionalBundle\Entity\Profissional,
+                controller: App\Application\Internit\ProfissionalBundle\Controller\ProfissionalAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Profissional",
+                label: Profissional,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.profissaobundle.profissao:
+        class: App\Application\Internit\ProfissaoBundle\Admin\ProfissaoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\ProfissaoBundle\Entity\Profissao,
+                controller: App\Application\Internit\ProfissaoBundle\Controller\ProfissaoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Profissao",
+                label: Profissao,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.periododisponivelagendamentobundle.periododisponivelagendamento:
+        class: App\Application\Internit\PeriodoDisponivelAgendamentoBundle\Admin\PeriodoDisponivelAgendamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\PeriodoDisponivelAgendamentoBundle\Entity\PeriodoDisponivelAgendamento,
+                controller: App\Application\Internit\PeriodoDisponivelAgendamentoBundle\Controller\PeriodoDisponivelAgendamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "PeriodoDisponivelAgendamento",
+                label: PeriodoDisponivelAgendamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.diaindisponivelagendamentobundle.diaindisponivelagendamento:
+        class: App\Application\Internit\DiaIndisponivelAgendamentoBundle\Admin\DiaIndisponivelAgendamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\DiaIndisponivelAgendamentoBundle\Entity\DiaIndisponivelAgendamento,
+                controller: App\Application\Internit\DiaIndisponivelAgendamentoBundle\Controller\DiaIndisponivelAgendamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "DiaIndisponivelAgendamento",
+                label: DiaIndisponivelAgendamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.downloadbundle.download:
+        class: App\Application\Internit\DownloadBundle\Admin\DownloadAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\DownloadBundle\Entity\Download,
+                controller: App\Application\Internit\DownloadBundle\Controller\DownloadAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Download",
+                label: Download,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.comunicadobundle.comunicado:
+        class: App\Application\Internit\ComunicadoBundle\Admin\ComunicadoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\ComunicadoBundle\Entity\Comunicado,
+                controller: App\Application\Internit\ComunicadoBundle\Controller\ComunicadoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "Comunicado",
+                label: Comunicado,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.periodoagendamentobundle.periodoagendamento:
+        class: App\Application\Internit\PeriodoAgendamentoBundle\Admin\PeriodoAgendamentoAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\PeriodoAgendamentoBundle\Entity\PeriodoAgendamento,
+                controller: App\Application\Internit\PeriodoAgendamentoBundle\Controller\PeriodoAgendamentoAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "PeriodoAgendamento",
+                label: PeriodoAgendamento,
+                icon: 'fa fa-solid fa-book',
+            }
+
+    internit.diasemanabundle.diasemana:
+        class: App\Application\Internit\DiaSemanaBundle\Admin\DiaSemanaAdmin
+        tags:
+            - {
+                name: sonata.admin,
+                manager_type: orm,
+                model_class: App\Application\Internit\DiaSemanaBundle\Entity\DiaSemana,
+                controller: App\Application\Internit\DiaSemanaBundle\Controller\DiaSemanaAdminController,
+                show_in_dashboard: true,
+                on_top: true,
+                group: "DiaSemana",
+                label: DiaSemana,
+                icon: 'fa fa-solid fa-book',
+            }
+
